@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createSelector } from '@reduxjs/toolkit';
 import { useTranslation } from 'react-i18next';
 
@@ -35,6 +35,16 @@ const StartupJoinModal = ({ onCloseModal }: StartupJoinModalProps) => {
     onClose();
   };
 
+  // effect for choosing Mic automatically
+  useEffect(() => {
+    setTimeout(() => {
+      const buttony = document.getElementById('share-mic'); // Replace with your actual button's ID
+      buttony?.dispatchEvent(
+        new MouseEvent('click', { bubbles: true, cancelable: true }),
+      );
+    }, 1000);
+  }, []);
+
   const render = () => {
     return (
       <div
@@ -46,20 +56,21 @@ const StartupJoinModal = ({ onCloseModal }: StartupJoinModalProps) => {
         } join-the-audio-popup absolute transition ease-in top-0 left-0 w-full h-full z-[999] bg-white/80 dark:bg-darkPrimary/90 px-6 flex items-center justify-center`}
       >
         <div className="popup-inner bg-white dark:bg-darkPrimary/90 w-full max-w-md rounded-2xl shadow-header relative px-6 py-14">
-          <button
+          {/* <button
             className="close-btn absolute top-8 right-6 w-[25px] h-[25px] outline-none"
             type="button"
             onClick={() => onClose(true)}
           >
             <span className="inline-block h-[1px] w-[20px] bg-primaryColor dark:bg-darkText absolute top-0 left-0 rotate-45" />
             <span className="inline-block h-[1px] w-[20px] bg-primaryColor dark:bg-darkText absolute top-0 left-0 -rotate-45" />
-          </button>
+          </button> */}
           <p className="text-base md:text-lg primaryColor dark:text-darkText font-normal mb-5 text-center">
             {t('app.how-to-join')}
           </p>
           <div className="btn flex justify-center">
             <button
               type="button"
+              id="share-mic"
               className="microphone bg-transparent ltr:mr-4 rtl:ml-4 text-center"
               onClick={() => shareMic()}
             >
@@ -70,7 +81,7 @@ const StartupJoinModal = ({ onCloseModal }: StartupJoinModalProps) => {
                 {t('app.microphone')}
               </p>
             </button>
-            <button
+            {/* <button
               type="button"
               id="listenOnlyJoin"
               className="headphone bg-transparent ltr:ml-4 rtl:mr-4 text-center"
@@ -84,7 +95,7 @@ const StartupJoinModal = ({ onCloseModal }: StartupJoinModalProps) => {
               <p className="text-sm md:text-base primaryColor dark:text-darkText font-normal">
                 {t('app.listen-only')}
               </p>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
