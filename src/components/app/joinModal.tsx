@@ -38,11 +38,11 @@ const StartupJoinModal = ({ onCloseModal }: StartupJoinModalProps) => {
   // effect for choosing Mic automatically
   useEffect(() => {
     setTimeout(() => {
-      const buttony = document.getElementById('share-mic'); // Replace with your actual button's ID
-      buttony?.dispatchEvent(
+      const btn = document.getElementById('share-mic'); // Replace with your actual button's ID
+      btn?.dispatchEvent(
         new MouseEvent('click', { bubbles: true, cancelable: true }),
       );
-    }, 1000);
+    }, 50);
   }, []);
 
   const render = () => {

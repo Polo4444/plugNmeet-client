@@ -44,6 +44,14 @@ const MicrophoneModal = ({
       if (audioDevices.length) {
         dispatch(addAudioDevices(audioDevices));
       }
+
+      // Auto select first mic
+      setTimeout(() => {
+        const btn = document.getElementById('select-mic'); // Replace with your actual button's ID
+        btn?.dispatchEvent(
+          new MouseEvent('click', { bubbles: true, cancelable: true }),
+        );
+      }, 50);
     };
     getDeviceMics();
   }, [dispatch]);
@@ -96,6 +104,7 @@ const MicrophoneModal = ({
 
               <div className="py-3 text-right">
                 <button
+                  id="select-mic"
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primaryColor hover:bg-secondaryColor focus:outline-none"
                   onClick={() => selectOrClose()}
                 >
